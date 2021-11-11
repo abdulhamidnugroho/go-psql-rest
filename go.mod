@@ -25,6 +25,4 @@ require (
 	github.com/jackc/pgx/v4 v4.13.0 // indirect
 	github.com/jinzhu/now v1.1.2 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gorm.io/driver/postgres v1.2.1 // indirect
-	gorm.io/gorm v1.22.2 // indirect
 )
