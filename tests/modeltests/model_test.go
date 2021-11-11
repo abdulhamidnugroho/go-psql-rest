@@ -82,7 +82,7 @@ func seedOneUSer() (models.User, error) {
 
 	err := server.DB.Model(&models.User{}).Create(&user).Error
 	if err != nil {
-		log.Fatal("cannot seed users table: %v", err)
+		log.Fatalf("cannot seed users table: %v", err)
 	}
 
 	return user, nil
@@ -156,7 +156,7 @@ func seedOneUserAndOnePost() (models.Post, error) {
 	return post, nil
 }
 
-func seedUsersAndPost() ([]models.User, []models.Post, error) {
+func seedUsersAndPosts() ([]models.User, []models.Post, error) {
 	var err error
 
 	if err != nil {
