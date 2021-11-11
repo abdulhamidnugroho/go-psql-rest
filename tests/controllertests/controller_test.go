@@ -44,7 +44,7 @@ func Database() {
 	}
 
 	if TestDbDriver == "postgres" {
-		DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", os.Getenv("TestDbPort"), os.Getenv("TestDbUser"), os.Getenv("TestDbName"), os.Getenv("TestDbPassword"))
+		DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", os.Getenv("TestDbHost"), os.Getenv("TestDbPort"), os.Getenv("TestDbUser"), os.Getenv("TestDbName"), os.Getenv("TestDbPassword"))
 		server.DB, err = gorm.Open(TestDbDriver, DBURL)
 		if err != nil {
 			fmt.Printf("cannot connect to %s database\n", TestDbDriver)
@@ -70,7 +70,7 @@ func refreshUserTable() error {
 	return nil
 }
 
-func seedOneUSer() (models.User, error) {
+func seedOneUser() (models.User, error) {
 	err := refreshUserTable()
 	if err != nil {
 		log.Fatal(err)
