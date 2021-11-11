@@ -117,7 +117,7 @@ func (u *User) FindAllUser(db *gorm.DB) (*[]User, error) {
 	return &users, err
 }
 
-func (u *User) FindUserById(db *gorm.DB, uid uint32) (*User, error) {
+func (u *User) FindUserByID(db *gorm.DB, uid uint32) (*User, error) {
 	// var err error
 	err := db.Debug().Model(User{}).Where("id = ?", uid).Take(&u).Error
 	if err != nil {
