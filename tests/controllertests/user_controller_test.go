@@ -190,7 +190,7 @@ func TestUpdateUser(t *testing.T) {
 
 	users, err := seedUsers() //need atleast two users to properly check the update
 	if err != nil {
-		log.Fatalf("Error seeding user: %v\n", err)
+		log.Fatalf("error seeding user: %v\n", err)
 	}
 
 	// Get only the first user

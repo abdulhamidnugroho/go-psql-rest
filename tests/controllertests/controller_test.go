@@ -17,8 +17,7 @@ var userInstance = models.User{}
 var postInstance = models.Post{}
 
 func TestMain(m *testing.M) {
-	var err error
-	err = godotenv.Load(os.ExpandEnv("../../.env"))
+	err := godotenv.Load(os.ExpandEnv("../../.env"))
 	if err != nil {
 		log.Fatalf("error getting env %v\n", err)
 	}
@@ -97,19 +96,19 @@ func seedUsers() ([]models.User, error) {
 	}
 
 	users := []models.User{
-		models.User{
+		{
 			Nickname: "Pierre Emile",
 			Email:    "pierre@gmail.com",
 			Password: "password",
 		},
-		models.User{
+		{
 			Nickname: "Oliver Skipp",
 			Email:    "skipp@gmail.com",
 			Password: "password",
 		},
 	}
 
-	for i, _ := range users {
+	for i := range users {
 		err := server.DB.Model(&models.User{}).Create(&users[i]).Error
 		if err != nil {
 			return []models.User{}, err
@@ -167,29 +166,29 @@ func seedUsersAndPost() ([]models.User, []models.Post, error) {
 	}
 
 	var users = []models.User{
-		models.User{
+		{
 			Nickname: "Lucas Moura",
 			Email:    "lucas@gmail.com",
 			Password: "password",
 		},
-		models.User{
+		{
 			Nickname: "Dele Alli",
 			Email:    "dele@gmail.com",
 			Password: "password",
 		},
 	}
 	var posts = []models.Post{
-		models.Post{
+		{
 			Title:   "Title 1",
 			Content: "Hello world 1",
 		},
-		models.Post{
+		{
 			Title:   "Title 2",
 			Content: "Hello world 2",
 		},
 	}
 
-	for i, _ := range users {
+	for i := range users {
 		err = server.DB.Model(&models.User{}).Create(&users[i]).Error
 		if err != nil {
 			log.Fatalf("cannot seed users table: %v", err)
