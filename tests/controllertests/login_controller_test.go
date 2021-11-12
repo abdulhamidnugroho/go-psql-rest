@@ -37,12 +37,12 @@ func TestSignIn(t *testing.T) {
 		{
 			email:        user.Email,
 			password:     "Wrong Password",
-			errorMessage: "crypto/bcrypt: hashedPassword is not the has of the given password",
+			errorMessage: "crypto/bcrypt: hashedPassword is not the hash of the given password",
 		},
 		{
 			email:        "Wrong Email",
 			password:     "password",
-			errorMessage: "not found",
+			errorMessage: "record not found",
 		},
 	}
 
@@ -51,7 +51,7 @@ func TestSignIn(t *testing.T) {
 		if err != nil {
 			assert.Equal(t, err, errors.New(v.errorMessage))
 		} else {
-			assert.Equal(t, token, "")
+			assert.NotEqual(t, token, "")
 		}
 	}
 }
