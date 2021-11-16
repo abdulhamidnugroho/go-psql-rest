@@ -108,14 +108,13 @@ func TestLogin(t *testing.T) {
 		},
 	}
 
-	for i, v := range samples {
+	for _, v := range samples {
 		req, err := http.NewRequest("POST", "/login", bytes.NewBufferString(v.inputJSON))
 		if err != nil {
 			t.Errorf("the error: %v", err)
 		}
 
 		rr := httptest.NewRecorder()
-		fmt.Printf("%d. body: %s - rr: %d\n", i, v.inputJSON, rr.Code) // debug
 		handler := http.HandlerFunc(server.Login)
 		handler.ServeHTTP(rr, req)
 
@@ -130,7 +129,6 @@ func TestLogin(t *testing.T) {
 			if err != nil {
 				t.Errorf("cannot convert to json: %v", err)
 			}
-			fmt.Println("133 ", (i), responseMap["error"]) // debug
 			assert.Equal(t, responseMap["error"], v.errorMessage)
 		}
 	}

@@ -102,8 +102,8 @@ func seedUsers() ([]models.User, error) {
 			Password: "password",
 		},
 		{
-			Nickname: "Oliver Skipp",
-			Email:    "skipp@gmail.com",
+			Nickname: "Kenny Morris",
+			Email:    "kenny@gmail.com",
 			Password: "password",
 		},
 	}

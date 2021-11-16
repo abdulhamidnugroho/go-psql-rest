@@ -55,39 +55,39 @@ func TestCreatePost(t *testing.T) {
 			inputJSON:    `{"title":"The title", "content": "the content", "author_id": 1}`,
 			statusCode:   500,
 			tokenGiven:   tokenString,
-			errorMessage: "Title Already Taken",
+			errorMessage: "title already taken",
 		},
 		{
 			// When no token is passed
 			inputJSON:    `{"title":"When no token is passed", "content": "the content", "author_id": 1}`,
 			statusCode:   401,
 			tokenGiven:   "",
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			// When incorrect token is passed
 			inputJSON:    `{"title":"When incorrect token is passed", "content": "the content", "author_id": 1}`,
 			statusCode:   401,
 			tokenGiven:   "This is an incorrect token",
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			inputJSON:    `{"title": "", "content": "The content", "author_id": 1}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Title",
+			errorMessage: "required title",
 		},
 		{
 			inputJSON:    `{"title": "This is a title", "content": "", "author_id": 1}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Content",
+			errorMessage: "required content",
 		},
 		{
 			inputJSON:    `{"title": "This is an awesome title", "content": "the content"}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Author",
+			errorMessage: "required author",
 		},
 		{
 			// When user 2 uses user 1 token
@@ -280,7 +280,7 @@ func TestUpdatePost(t *testing.T) {
 			updateJSON:   `{"title":"This is still another title", "content": "This is the updated content", "author_id": 1}`,
 			tokenGiven:   "",
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			// When incorrect token is provided
@@ -288,7 +288,7 @@ func TestUpdatePost(t *testing.T) {
 			updateJSON:   `{"title":"This is still another title", "content": "This is the updated content", "author_id": 1}`,
 			tokenGiven:   "this is an incorrect token",
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			//Note: "Title 2" belongs to post 2, and title must be unique
@@ -296,28 +296,28 @@ func TestUpdatePost(t *testing.T) {
 			updateJSON:   `{"title":"Title 2", "content": "This is the updated content", "author_id": 1}`,
 			statusCode:   500,
 			tokenGiven:   tokenString,
-			errorMessage: "Title Already Taken",
+			errorMessage: "title already taken",
 		},
 		{
 			id:           strconv.Itoa(int(AuthPostID)),
 			updateJSON:   `{"title":"", "content": "This is the updated content", "author_id": 1}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Title",
+			errorMessage: "required title",
 		},
 		{
 			id:           strconv.Itoa(int(AuthPostID)),
 			updateJSON:   `{"title":"Awesome title", "content": "", "author_id": 1}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Content",
+			errorMessage: "required content",
 		},
 		{
 			id:           strconv.Itoa(int(AuthPostID)),
 			updateJSON:   `{"title":"This is another title", "content": "This is the updated content"}`,
 			statusCode:   401,
 			tokenGiven:   tokenString,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			id:         "unknwon",
@@ -325,10 +325,10 @@ func TestUpdatePost(t *testing.T) {
 		},
 		{
 			id:           strconv.Itoa(int(AuthPostID)),
-			updateJSON:   `{"title":"This is still another title", "content": "This is the updated content", "author_id": 2}`,
+			updateJSON:   `{"title":"This is still another title x", "content": "This is the updated content", "author_id": 2}`,
 			tokenGiven:   tokenString,
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 	}
 
@@ -424,7 +424,7 @@ func TestDeletePost(t *testing.T) {
 			author_id:    PostUserID,
 			tokenGiven:   "",
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			// When incorrect token is passed
@@ -432,7 +432,7 @@ func TestDeletePost(t *testing.T) {
 			author_id:    PostUserID,
 			tokenGiven:   "This is an incorrect token",
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			id:         "unknwon",
@@ -443,7 +443,7 @@ func TestDeletePost(t *testing.T) {
 			id:           strconv.Itoa(int(1)),
 			author_id:    1,
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 	}
 

@@ -234,7 +234,7 @@ func TestUpdateUser(t *testing.T) {
 			updateJSON:   `{"nickname":"Woman", "email": "woman@gmail.com", "password": ""}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Password",
+			errorMessage: "required password",
 		},
 		{
 			// When no token was passed
@@ -242,7 +242,7 @@ func TestUpdateUser(t *testing.T) {
 			updateJSON:   `{"nickname":"Man", "email": "man@gmail.com", "password": "password"}`,
 			statusCode:   401,
 			tokenGiven:   "",
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			// When incorrect token was passed
@@ -250,7 +250,7 @@ func TestUpdateUser(t *testing.T) {
 			updateJSON:   `{"nickname":"Woman", "email": "woman@gmail.com", "password": "password"}`,
 			statusCode:   401,
 			tokenGiven:   "This is incorrect token",
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			// Remember "kenny@gmail.com" belongs to user 2
@@ -258,7 +258,7 @@ func TestUpdateUser(t *testing.T) {
 			updateJSON:   `{"nickname":"Frank", "email": "kenny@gmail.com", "password": "password"}`,
 			statusCode:   500,
 			tokenGiven:   tokenString,
-			errorMessage: "Email Already Taken",
+			errorMessage: "email already taken",
 		},
 		{
 			// Remember "Kenny Morris" belongs to user 2
@@ -266,28 +266,28 @@ func TestUpdateUser(t *testing.T) {
 			updateJSON:   `{"nickname":"Kenny Morris", "email": "grand@gmail.com", "password": "password"}`,
 			statusCode:   500,
 			tokenGiven:   tokenString,
-			errorMessage: "Nickname Already Taken",
+			errorMessage: "nickname already taken",
 		},
 		{
 			id:           strconv.Itoa(int(AuthID)),
 			updateJSON:   `{"nickname":"Kan", "email": "kangmail.com", "password": "password"}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Invalid Email",
+			errorMessage: "invalid email",
 		},
 		{
 			id:           strconv.Itoa(int(AuthID)),
 			updateJSON:   `{"nickname": "", "email": "kan@gmail.com", "password": "password"}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Nickname",
+			errorMessage: "required nickname",
 		},
 		{
 			id:           strconv.Itoa(int(AuthID)),
 			updateJSON:   `{"nickname": "Kan", "email": "", "password": "password"}`,
 			statusCode:   422,
 			tokenGiven:   tokenString,
-			errorMessage: "Required Email",
+			errorMessage: "required email",
 		},
 		{
 			id:         "unknwon",
@@ -300,10 +300,10 @@ func TestUpdateUser(t *testing.T) {
 			updateJSON:   `{"nickname": "Mike", "email": "mike@gmail.com", "password": "password"}`,
 			tokenGiven:   tokenString,
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 	}
-
+	// fmt.Println("Auth1: ", reflect.TypeOf(AuthID), "Auth2: ", reflect.TypeOf(AuthID2))
 	for _, v := range samples {
 		req, err := http.NewRequest("POST", "/users", bytes.NewBufferString(v.updateJSON))
 		if err != nil {
@@ -386,14 +386,14 @@ func TestDeleteUser(t *testing.T) {
 			id:           strconv.Itoa(int(AuthID)),
 			tokenGiven:   "",
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			// When incorrect token is given
 			id:           strconv.Itoa(int(AuthID)),
 			tokenGiven:   "This is an incorrect token",
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 		{
 			id:         "unknwon",
@@ -405,7 +405,7 @@ func TestDeleteUser(t *testing.T) {
 			id:           strconv.Itoa(int(2)),
 			tokenGiven:   tokenString,
 			statusCode:   401,
-			errorMessage: "Unauthorized",
+			errorMessage: "unauthorized",
 		},
 	}
 
